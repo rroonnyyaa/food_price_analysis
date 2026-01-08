@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="ru">
 	<head>
@@ -5,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <script src="https://cdn.tailwindcss.com"></script>
+        {% tailwind_css %}
 	</head>
 
 	<body class="bg-gray-50 font-sans leading-normal tracking-normal flex flex-col min-h-screen">
@@ -19,11 +20,20 @@
 					<a href="{% url 'home' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
 						Главная
 					</a>
+                    <a href="{% url 'analytics-dashboard' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
+						Дашборд
+					</a>
 					<a href="{% url 'analytics-products-list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
 						Товары
 					</a>
+                    <a href="{% url 'analytics-category-list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
+						Категории
+					</a>
                     <a href="{% url 'analytics-stores-list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
 						Магазины
+					</a>
+                    <a href="{% url 'analytics-import-export' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
+						Импорт/Экспорт
 					</a>
 				</div>
                 <div class="text-sm">

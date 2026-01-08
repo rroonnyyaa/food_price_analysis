@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Категории - Food Price Analytics{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Категории продуктов</h1>
+    <p class="text-gray-600">Выберите категорию для детального анализа.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for category in categories %}
+    <a href="{% url 'analytics-category-detail' slug=category.slug %}" class="block group">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-full transition duration-200 hover:shadow-md hover:border-teal-500">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-gray-800 group-hover:text-teal-600">{{ category.name }}</h3>
+                <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ category.product_count }} товаров</span>
+            </div>
+            <p class="text-gray-500 text-sm">Нажмите для просмотра товаров и динамики цен в этой категории.</p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -34,22 +34,110 @@
                 {% endif %}
             </div>
 
-            <div class="mt-8">
+            <div class="mt-8 flex space-x-4">
                 <a href="{% url 'analytics-products-list' %}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
                     ← Назад к списку
+                </a>
+                <a href="{% url 'analytics-product-update' product.pk %}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                    Редактировать
                 </a>
             </div>
         </div>
     </div>
 </div>
 
-{% if plot_url %}
+{% if forecast and forecast.model_status == 'success' %}
+<div class="bg-gradient-to-r from-gray-50 to-white rounded-lg shadow-md border border-gray-200 p-6 mb-8 relative overflow-hidden">
+    <div class="md:flex justify-between items-center">
+        <div>
+           <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-800">Прогноз цены (AI)</h3>
+                <span class="px-2 py-0.5 rounded text-xs font-bold bg-teal-100 text-teal-800 border border-teal-200">BETA</span>
+           </div>
+           <p class="text-gray-600 mb-4 md:mb-0">На основе исторического тренда (линейная регрессия)</p>
+        </div>
+        <div class="text-right">
+            <div class="text-sm text-gray-500 mb-1">Ожидаемая цена через 30 дней</div>
+            <div class="text-4xl font-bold {% if forecast.trend > 0 %}text-red-500{% elif forecast.trend < 0 %}text-green-500{% else %}text-gray-700{% endif %}">
+                {{ forecast.predicted_price }} ₽
+            </div>
+            <div class="text-sm font-medium {% if forecast.trend > 0 %}text-red-600{% elif forecast.trend < 0 %}text-green-600{% else %}text-gray-500{% endif %}">
+                Тренд: {% if forecast.trend > 0 %}▲ Рост (+{{ forecast.trend }} ₽/день){% elif forecast.trend < 0 %}▼ Снижение ({{ forecast.trend }} ₽/день){% else %}— Стабильно{% endif %}
+            </div>
+        </div>
+    </div>
+    {% if forecast.r2_score < 0.3 %}
+    <div class="mt-4 p-3 bg-yellow-50 text-yellow-800 text-sm rounded border border-yellow-200">
+        ⚠️ <strong>Низкая точность прогноза:</strong> Данные слишком хаотичны для точного предсказания (R²={{ forecast.r2_score }}).
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+{% if chart_dates %}
 <div class="bg-white rounded-lg shadow-md border border-gray-200 p-6 mb-8">
     <h3 class="text-xl font-bold text-gray-800 mb-4">График изменения цены</h3>
-    <div class="flex justify-center">
-        <img src="data:image/png;base64,{{ plot_url }}" alt="График цены" class="max-w-full h-auto rounded">
+    <div class="w-full h-64">
+        <canvas id="priceChart"></canvas>
     </div>
 </div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    const dates = {{ chart_dates|safe }};
+    const prices = {{ chart_prices|safe }};
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Цена (₽)',
+                data: prices,
+                borderColor: '#0d9488', // teal-600
+                backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                borderWidth: 2,
+                tension: 0.1,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: '#fff',
+                pointBorderColor: '#0d9488'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.parsed.y + ' ₽';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: 'Цена (руб.)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+</script>
 {% endif %}
 
 <div class="bg-white rounded-lg shadow-md border border-gray-200 p-6">
