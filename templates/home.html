@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Food Price Analytics{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+    <h1 class="text-4xl font-bold mb-4 text-gray-800">Анализ цен на продукты</h1>
+    <p class="text-xl text-gray-600 mb-6">Агрегация цен из онлайн-магазинов, анализ продуктовой инфляции, сезонности и поиск выгодных периодов для покупок.</p>
+    <a href="{% url 'analytics-product-list' %}" class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+        Перейти в каталог товаров
+    </a>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-gray-800 text-white rounded-lg p-8 shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">Магазины</h2>
+        <p class="mb-6 text-gray-300">Мы отслеживаем цены в крупнейших торговых сетях. Управляйте списком магазинов и их адресами.</p>
+        <a href="{% url 'analytics-store-list' %}" class="inline-block border-2 border-white text-white hover:bg-white hover:text-gray-800 font-bold py-2 px-4 rounded transition duration-300">
+            Список магазинов
+        </a>
+    </div>
+
+    <div class="bg-white border rounded-lg p-8 shadow-lg">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">Мониторинг цен</h2>
+        <p class="mb-6 text-gray-600">Просматривайте историю изменения цен на товары, добавляйте записи вручную через панель администратора.</p>
+        <a href="{% url 'analytics-pricerecord-list' %}" class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition duration-300">
+            История цен
+        </a>
+    </div>
+</div>
+{% endblock %}

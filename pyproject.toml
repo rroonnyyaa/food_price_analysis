@@ -5,8 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "cookiecutter>=2.6.0",
     "django>=5.0,<6.0",
+    "django-browser-reload>=1.21.0",
     "django-crudbuilder>=0.2.8",
+    "django-tailwind>=4.4.2",
     "matplotlib>=3.10.8",
     "pandas>=2.3.3",
 ]
