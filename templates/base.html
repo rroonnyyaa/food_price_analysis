@@ -40,8 +40,6 @@
                     {% if user.is_authenticated %}
                         <span class="text-teal-100 mr-4">Привет, {{ user.username }}</span>
                         <a class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-600 hover:bg-white mt-4 lg:mt-0 transition duration-150" href="/admin/logout/">Выход</a>
-                    {% else %}
-					    <a href="/admin/login/" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-600 hover:bg-white mt-4 lg:mt-0 transition duration-150">Вход</a>
                     {% endif %}
 				</div>
 			</div>
@@ -62,7 +60,7 @@
 
         <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
             <div class="container mx-auto text-center text-sm">
-                Food Price Analytics &copy; 2026.
+                Food Price Analytics &copy; 2026. <a href="/admin/login/" class="hover:text-gray-200 ml-4 transition duration-150">Staff Login</a>
             </div>
         </footer>
 	</body>

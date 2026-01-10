@@ -12,9 +12,14 @@
         <canvas id="inflationChart"></canvas>
     </div>
 
-    <a href="{% url 'analytics-products-list' %}" class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200">
-        Перейти в каталог товаров
-    </a>
+    <div class="flex flex-wrap gap-4">
+        <a href="{% url 'analytics-products-list' %}" class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200">
+            Перейти в каталог товаров
+        </a>
+        <a href="{% url 'analytics-dashboard' %}" class="inline-block bg-white text-teal-600 border-2 border-teal-600 hover:bg-teal-50 font-bold py-3 px-6 rounded-lg transition duration-200">
+            Открыть Дашборд
+        </a>
+    </div>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -27,10 +32,10 @@
     </div>
 
     <div class="bg-white border border-gray-200 rounded-lg p-8 shadow-md">
-        <h2 class="text-2xl font-bold mb-4 text-gray-800">Мониторинг цен</h2>
-        <p class="mb-6 text-gray-600">Просматривайте историю изменения цен на товары, добавляйте записи вручную через панель администратора.</p>
-        <a href="/admin/" class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition duration-200">
-            Панель администратора
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">Категории товаров</h2>
+        <p class="mb-6 text-gray-600">Изучайте ассортимент по категориям: молочные продукты, овощи, фрукты, мясо и многое другое.</p>
+        <a href="{% url 'analytics-category-list' %}" class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded transition duration-200">
+            Все категории
         </a>
     </div>
 </div>
