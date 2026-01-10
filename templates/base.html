@@ -9,49 +9,52 @@
 		{% tailwind_css %}
 	</head>
 
-	<body class="bg-gray-50 font-sans leading-normal tracking-normal">
-		<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+	<body class="bg-gray-50 font-sans leading-normal tracking-normal flex flex-col min-h-screen">
+		<nav class="flex items-center justify-between flex-wrap bg-teal-600 p-6 shadow-md">
 			<div class="flex items-center shrink-0 text-white mr-6">
 				<span class="font-semibold text-xl tracking-tight">FoodAnalytics</span>
 			</div>
 			
 			<div class="w-full block grow lg:flex lg:items-center lg:w-auto">
 				<div class="text-sm lg:grow">
-					<a href="{% url 'home' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+					<a href="{% url 'home' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
 						Главная
 					</a>
-					<a href="{% url 'analytics-products-list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+					<a href="{% url 'analytics-products-list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
 						Товары
 					</a>
-                    <a href="{% url 'analytics-stores-list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    <a href="{% url 'analytics-stores-list' %}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-100 hover:text-white mr-4 transition duration-150">
 						Магазины
 					</a>
 				</div>
                 <div class="text-sm">
                     {% if user.is_authenticated %}
                         <span class="text-teal-100 mr-4">Привет, {{ user.username }}</span>
-                        <!-- Simple logout link pointing to admin logout -->
-                        <a class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0" href="/admin/logout/">Выход</a>
+                        <a class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-600 hover:bg-white mt-4 lg:mt-0 transition duration-150" href="/admin/logout/">Выход</a>
                     {% else %}
-					    <a href="/admin/login/" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Вход</a>
+					    <a href="/admin/login/" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-600 hover:bg-white mt-4 lg:mt-0 transition duration-150">Вход</a>
                     {% endif %}
 				</div>
 			</div>
 		</nav>
 
-		<div class="container mx-auto px-4 py-8">
+		<main class="container mx-auto px-4 py-8 grow">
             {% if messages %}
                 {% for message in messages %}
-                <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 mb-4" role="alert">
+                <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4" role="alert">
                     <p class="font-bold">Info</p>
-                    <p class="text-sm">{{ message }}</p>
+                    <p>{{ message }}</p>
                 </div>
                 {% endfor %}
             {% endif %}
             
-			{% block content %}
-			{% endblock %}
-		</div>
+            {% block content %}{% endblock %}
+        </main>
 
+        <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
+            <div class="container mx-auto text-center text-sm">
+                Food Price Analytics &copy; 2026.
+            </div>
+        </footer>
 	</body>
 </html>

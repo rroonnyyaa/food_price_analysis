@@ -21,6 +21,7 @@ from analytics.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('analytics/', include('analytics.urls')),
     path('crud/', include('crudbuilder.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
     path('', home, name='home'),
