@@ -90,3 +90,14 @@ uv run python manage.py tailwind start
 *   `theme/` — Приложение стилей (Django Tailwind).
 *   `templates/` — HTML шаблоны.
 *   `pyproject.toml` — Управление зависимостями проекта.
+
+## Скриншоты
+
+Главная
+<img width="1852" height="934" alt="image" src="https://github.com/user-attachments/assets/9387380f-cde3-47de-8955-f3d9d8d92577" />
+Дашборд
+<img width="1608" height="922" alt="image" src="https://github.com/user-attachments/assets/f99eef04-3db1-44c2-804f-9b3408c762b9" />
+<img width="1594" height="632" alt="image" src="https://github.com/user-attachments/assets/ada379ed-a2f9-4d7f-a54f-26e55f7b025d" />
+Товары для администратора
+<img width="1471" height="852" alt="image" src="https://github.com/user-attachments/assets/3f6fbb92-64c6-4852-8800-7a21cc26fc88" />
+
