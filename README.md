@@ -79,7 +79,11 @@ uv run python manage.py tailwind install
 ```bash
 uv run python manage.py tailwind start
 ```
-
+##Хостинг
+Я использовала агента ngrok для вывода сайта 
+```bash
+https://merlyn-undelineable-trey.ngrok-free.dev
+```
 ## Структура проекта
 
 *   `analytics/` — Основное приложение:
